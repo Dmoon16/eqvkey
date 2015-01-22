@@ -15,11 +15,16 @@
 (defn make-bit-seq 
 	"Transforms a string into a list of bits"
 	[key]
-	(mapcat 
-		#(let [bt %] 
-			(for [i (range 8)] 
-				(if (bit-test bt i) 1 0))) 
-		(byte-list key)))
+	(letfn [
+		(make-bit [el] 
+			(let [bt el] 
+				(for [i (range 8)] 
+					(if (bit-test bt i) 1 0))))]
+		(cond
+			(string? key) (mapcat make-bit (byte-list key))
+			(number? (first key)) (mapcat make-bit key)
+			:else (throw 
+				(IllegalArgumentException. "make-bit-seq requires a string or a byte list")))))
 
 (defn eqv 
 	"Computes the equivalent key to a string as a list of bits"

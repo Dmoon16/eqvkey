@@ -1,4 +1,4 @@
-(defproject org.clojars.adrianr/eqvkey "0.2"
+(defproject org.clojars.adrianr/eqvkey "0.3"
   :description "Clojure library for computing equivalent keys using the threshold swap method"
   :url "https://github.com/adrianrosian/eqvkey"
   :license {:name "Eclipse Public License"
